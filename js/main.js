@@ -12,7 +12,7 @@ let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
 let buzos_array = [];
 
-fetch("/json/buzos.json")
+fetch("./json/buzos.json")
   .then(res => res.json())
   .then(data => {
     console.log("BUZOS CARGADOS:", data); 
