@@ -1,15 +1,16 @@
 let carritoContainer = document.getElementById("carrito-container")
 let carritoStorage = localStorage.getItem("carritoProduct")
+let TotalCompra = localStorage.getItem("total")
 carritoStorage = JSON.parse(carritoStorage)
 
-function agregarAlCarrito(products){
+function carrito(products){
     carritoContainer.innerHTML = "";
-    total = 0
+    let total= 0;
     products.forEach (product => { 
         const item = document.createElement("div")
         item.className="div-carrito"
         const subtotal = product.cantidad * product.precio
-        // total += subtotal
+        total += subtotal
         item.innerHTML= `
                          <a href="${product.nombre}.html"> <img class="img-buzo" src=".${product.imagen}"></a>
                          <h3 class="nombre-buzo">${product.nombre}</h3>
@@ -18,7 +19,6 @@ function agregarAlCarrito(products){
                          <button class="sumar-boton" id="${product.id}">+</button>
                          <button class="eliminar" id="${product.id}">Eliminar</button>
                          <span class"subtotal">$${subtotal}</span>
-
                             `
         carritoContainer.appendChild(item)
         
@@ -36,16 +36,21 @@ function agregarAlCarrito(products){
     const botonesRestar = document.querySelectorAll(".restar-boton");
 
     botonesRestar.forEach(boton => {
-    boton.onclick = () => cambiarCantidad(parseInt(boton.dataset.id),-1);
+    boton.onclick = () => cambiarCantidad(parseInt(boton.id),-1);
         
     });
     
     botonesSumar.forEach(boton => {
-    boton.onclick = () => cambiarCantidad(parseInt(boton.dataset.id), +1);
+    boton.onclick = () => cambiarCantidad(parseInt(boton.id), +1);
     });
+
+    const totalDiv = document.createElement("div");
+    totalDiv.className = "total-carrito";
+    totalDiv.innerHTML = `<h2>Total: $${total}</h2>`;
+    carritoContainer.appendChild(totalDiv);
+
 }
     
-
 
 function eliminar(productId){
     carritoStorage = carritoStorage.filter(product => product.id != productId)
@@ -54,24 +59,26 @@ function eliminar(productId){
     agregarAlCarrito(carritoStorage)
 }
 
-// function cambiarCantidad(productId,cambio){
-//   carritoStorage = carritoStorage.map(product => {
-//     if (product.id == productId) {
-//       const nuevaCantidad = product.cantidad + cambio;
-//       if (nuevaCantidad <= 0) {
-//         eliminar(productId); 
-//         return null;
-//       }
-//       return { ...product, cantidad: nuevaCantidad }
-//     }
-//     return product;
-//   }).filter(product => product !== null);
+function cambiarCantidad(productId,cambio){
+  carritoStorage = carritoStorage.map(product => {
+    if (product.id == productId) {
+      const nuevaCantidad = product.cantidad + cambio;
+      if (nuevaCantidad <= 0) {
+        eliminar(productId); 
+        return null;
+      }
+      return { ...product, cantidad: nuevaCantidad }
+    }
+    return product;
+  }).filter(product => product !== null);
 
-//    localStorage.setItem("carritoProduct", JSON.stringify(carritoStorage));
-//    mostrarCarrito();
+   localStorage.setItem("carritoProduct", JSON.stringify(carritoStorage));
+   agregarAlCarrito(carritoStorage)
 
-// }
+}
 
 
-agregarAlCarrito(carritoStorage)
+carrito(carritoStorage)
+
+
 

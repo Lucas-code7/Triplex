@@ -1,81 +1,38 @@
-const buzos_array =[ 
-    {id : 1,
-    nombre : "buzo disturb",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-    {
-    id : 2,
-    nombre : "buzo 2",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-    {
-    id : 3,
-    nombre : "buzo 3",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-    {
-    id : 4,
-    nombre : "buzo 4",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
 
-    },
-    {
-    id : 5,
-    nombre : "buzo 5",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-    {
-    id : 6,
-    nombre : "buzo 6",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-    {
-    id : 7,
-    nombre : "buzo 7",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-
-    {
-    id : 8,
-    nombre : "buzo 8",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-
-    {
-    id : 9,
-    nombre : "buzo 9",
-    precio: 30.000,
-    imagen: "./img/buzo_disturb.png",
-    cantidad : 10
-    },
-]
+// tuve que usar chat gpt, perdon
+function ajustarRuta(ruta) {
+  const enPages = window.location.pathname.includes("/pages/");
+  return enPages ? "../" + ruta : ruta;
+}
+// esto solo porque no lo entendia muy bien el como construir bien la ruta y que no se mezcle creando un buzo,js
 
 let productos = document.getElementById("buzos")
-renderResultados(buzos_array)
-agregarAlCarrito()
+let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+  obtenerBuzos();
+});
 
-function renderResultados(){
-buzos_array.forEach(buzo => {
+
+async function obtenerBuzos() {
+  try {
+    const response = await fetch("../json/buzos.json");
+    const data = await response.json();
+    renderResultados(data);
+    agregarAlCarrito(data);
+  } catch (error) {
+    console.error("Error al cargar los buzos:", error);
+    productos.innerHTML = "<p>No se pudieron cargar los productos, reinice la pagina..disculpe</p>";
+  }
+}
+
+
+function renderResultados(array){
+productos.innerHTML = ""    
+array.forEach(buzo => {
     const container = document.createElement("div")
     container.className = "card-buzo"
     container.innerHTML=`
-                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="${buzo.imagen}"></a>
+                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="${ajustarRuta(buzo.imagen)}"></a>
                          <h3 class="nombre-buzo">${buzo.nombre}</h3>
                          <p>$${buzo.precio} <button class="add-product" id="${buzo.id}">+</button></p>
                             `
@@ -84,18 +41,32 @@ buzos_array.forEach(buzo => {
 }
 
 
-const carritoProduct =[]
-
-function agregarAlCarrito(){
+function agregarAlCarrito(buzosArray){
     const agregar = document.querySelectorAll(".add-product")
     agregar.forEach(boton=>{
         boton.onclick= (e) =>{
             const productoId = e.currentTarget.id
             const confirmProduct = buzos_array.find(buzo => buzo.id == productoId);
-            carritoProduct.push(confirmProduct) 
-            localStorage.setItem("carritoProduct", JSON.stringify(carritoProduct))
+            let carritoActual = JSON.parse(localStorage.getItem("carritoProduct")) || [];
+            const existeEnCarrito = carritoActual.find(x => x.id == confirmProduct.id);
+            if (existeEnCarrito) {
+            existeEnCarrito.cantidad += 1;
+            } else {
+            carritoActual.push({ ...confirmProduct, cantidad: 1 });
+            }
+            localStorage.setItem("carritoProduct", JSON.stringify(carritoActual));
     }}
     )
 }
 
+const agregar = document.querySelectorAll(".add-product");
+ 
+
+search_buzos.addEventListener("input", () => {
+  const termino = search_buzos.value.toLowerCase()
+  const filtrados = buzos_array.filter(buzo =>
+    buzo.nombre.toLowerCase().includes(termino)
+  )
+  renderResultados(filtrados)
+})
 
