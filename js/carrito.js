@@ -1,7 +1,5 @@
 let carritoContainer = document.getElementById("carrito-container")
-let carritoStorage = localStorage.getItem("carritoProduct")
-let TotalCompra = localStorage.getItem("total")
-carritoStorage = JSON.parse(carritoStorage)
+let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
 function carrito(products){
     carritoContainer.innerHTML = "";
@@ -12,7 +10,7 @@ function carrito(products){
         const subtotal = product.cantidad * product.precio
         total += subtotal
         item.innerHTML= `
-                         <a href="${product.nombre}.html"> <img class="img-buzo" src=".${product.imagen}"></a>
+                         <a href="${product.nombre}.html"> <img class="img-buzo" src="${product.imagen}"></a>
                          <h3 class="nombre-buzo">${product.nombre}</h3>
                          <button class="restar-boton" id="${product.id}">-</button>
                          <span class"cantidad" id="cantidad" >${product.cantidad} </span>
@@ -21,33 +19,24 @@ function carrito(products){
                          <span class"subtotal">$${subtotal}</span>
                             `
         carritoContainer.appendChild(item)
-        
-        const botonEliminar = document.querySelectorAll(".eliminar")
-        botonEliminar.forEach(boton => {
-        boton.onclick = (e) => {
-            const productId = e.currentTarget.id
-            eliminar(productId)
-        };
-    });
-        
-    });
-    
-    const botonesSumar = document.querySelectorAll(".sumar-boton");
-    const botonesRestar = document.querySelectorAll(".restar-boton");
-
-    botonesRestar.forEach(boton => {
-    boton.onclick = () => cambiarCantidad(parseInt(boton.id),-1);
-        
-    });
-    
-    botonesSumar.forEach(boton => {
-    boton.onclick = () => cambiarCantidad(parseInt(boton.id), +1);
     });
 
     const totalDiv = document.createElement("div");
-    totalDiv.className = "total-carrito";
-    totalDiv.innerHTML = `<h2>Total: $${total}</h2>`;
-    carritoContainer.appendChild(totalDiv);
+      totalDiv.className = "total-carrito";
+      totalDiv.innerHTML = `<h2>Total: $${total}</h2>`;
+      carritoContainer.appendChild(totalDiv);
+    
+    document.querySelectorAll(".eliminar").forEach(boton => {
+    boton.onclick = (e) => eliminar(e.currentTarget.id);
+  });
+
+  document.querySelectorAll(".sumar-boton").forEach(boton => {
+    boton.onclick = () => cambiarCantidad(parseInt(boton.id), 1);
+  });
+
+  document.querySelectorAll(".restar-boton").forEach(boton => {
+    boton.onclick = () => cambiarCantidad(parseInt(boton.id), -1);
+  });
 
 }
     
@@ -56,7 +45,7 @@ function eliminar(productId){
     carritoStorage = carritoStorage.filter(product => product.id != productId)
     console.log(carritoStorage)
     localStorage.setItem("carritoProduct", JSON.stringify(carritoStorage))
-    agregarAlCarrito(carritoStorage)
+    carrito(carritoStorage)
 }
 
 function cambiarCantidad(productId,cambio){
@@ -73,12 +62,10 @@ function cambiarCantidad(productId,cambio){
   }).filter(product => product !== null);
 
    localStorage.setItem("carritoProduct", JSON.stringify(carritoStorage));
-   agregarAlCarrito(carritoStorage)
+   carrito(carritoStorage)
 
 }
 
 
 carrito(carritoStorage)
-
-
 

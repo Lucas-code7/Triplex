@@ -4,9 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script defer src="../js/main.js"></script>
-    <title>Buzos-Triplex</title>
-
+    <script defer src="../js/factura.js"></script>
+    <title>Carrito-Triplex</title>
 </head>
 <body>
     <header>
@@ -20,14 +19,17 @@
             <a href="carrito.html"><img src="../img/cart-add-regular-60.png.png" alt=""></a>
         </nav>
     </header>
-    <div class="titulos"><h1>Buzos</h1></div>
-    <article class="article-reciclabe">
-        <input  type="text" name="busqueda de buzo" id="search_buzos">
-    </article>
-    <section class="buzos-container-1" id="buzos">
+    <section class="buzos-container-1">
+        <div>
+            <h2 class="titulos">Su factura</h2>
+            <article class="productosPagar" id="productosPagar"> 
+            </article>
+        </div>
 
     </section>
-    
+    <article class="article-reciclabe">
+    <button class="boton" id="btnclear" type="button">Volver</button>
+    </article>
 <footer>
         <div class="redes">
             <h3>seguinos en:</h3>
@@ -44,7 +46,7 @@
             Argentina, Neuquen, San Martin De Los Andes
         </div>
        </div>
-</footer>  
-
+</footer>    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
