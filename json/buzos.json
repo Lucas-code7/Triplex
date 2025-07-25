@@ -2,28 +2,28 @@
     {"id" : 1,
     "nombre" : "buzo disturb",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
     {
     "id" : 2,
     "nombre" : "buzo 2",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
     {
     "id" : 3,
     "nombre" : "buzo 3",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
     {
     "id" : 4,
     "nombre" : "buzo 4",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
 
     },
@@ -31,21 +31,21 @@
     "id" : 5,
     "nombre" : "buzo 5",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
     {
     "id" : 6,
     "nombre" : "buzo 6",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
     {
     "id" : 7,
     "nombre" : "buzo 7",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
 
@@ -53,7 +53,7 @@
     "id" : 8,
     "nombre" : "buzo 8",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     },
 
@@ -61,7 +61,7 @@
     "id" : 9,
     "nombre" : "buzo 9",
     "precio": 300,
-    "imagen": "/img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
     }
     ]
