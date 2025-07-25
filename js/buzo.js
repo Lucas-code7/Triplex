@@ -1,22 +1,8 @@
+// es lo mismo que main.js pero porque no me cargaba la imagen del producto por la ruta
+
 
 const productos = document.getElementById("buzos")
 let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
-
-let buzos_array = [];
-
-fetch("/Triplex/json/buzos.json")
-  .then(res => res.json())
-  .then(data => {
-    console.log("BUZOS CARGADOS:", data); 
-    buzos_array = data;
-    renderResultados(data);
-    agregarAlCarrito(data)
-  })
-  .catch(err =>{ 
-    console.error("Error al cargar los buzos:", err);
-    productos.innerHTML = "<p>Error al cargar los productos...disculpe las molestias, vuelva pronto.</p>";
-  });
-
 
 function renderResultados(array){
 productos.innerHTML = ""    
@@ -24,7 +10,7 @@ array.forEach(buzo => {
     const container = document.createElement("div")
     container.className = "card-buzo"
     container.innerHTML=`
-                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src=".${buzo.imagen}"></a>
+                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="..${buzo.imagen}"></a>
                          <h3 class="nombre-buzo">${buzo.nombre}</h3>
                          <p>$${buzo.precio} <button class="add-product" id="${buzo.id}">+</button></p>
                             `
@@ -61,4 +47,3 @@ if (search_buzos) {
     agregarAlCarrito(filtrados);
   });
 }
-
