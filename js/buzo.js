@@ -1,14 +1,8 @@
-// chat gpt
-function ajustarRuta(ruta) {
-  const enSubcarpeta = window.location.pathname.includes("/pages/");
-  return enSubcarpeta ? "../" + ruta : ruta;
-}
-// es lo mismo que main.js pero porque no me cargaba la imagen del producto por la ruta
+// es lo mismo que el index solo que cambia la ruta de las imagenes porque no sabia como hacerlo
+
 
 const productos = document.getElementById("buzos")
-
-let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];
-
+let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
 function renderResultados(array){
 productos.innerHTML = ""    
@@ -16,7 +10,7 @@ array.forEach(buzo => {
     const container = document.createElement("div")
     container.className = "card-buzo"
     container.innerHTML=`
-                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="${ajustarRuta(buzo.imagen)}"></a>
+                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="${buzo.imagen}"></a>
                          <h3 class="nombre-buzo">${buzo.nombre}</h3>
                          <p>$${buzo.precio} <button class="add-product" id="${buzo.id}">+</button></p>
                             `
