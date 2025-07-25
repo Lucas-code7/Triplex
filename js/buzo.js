@@ -4,9 +4,24 @@ function ajustarRuta(ruta) {
 }
 
 const productos = document.getElementById("buzos");
-let buzos_array = [];
-let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
+const search_buzos = document.getElementById("search_buzos");
 
+let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
+let buzos_array = []; 
+
+if (productos) {
+  fetch(ajustarRuta("json/buzos.json"))
+    .then(res => res.json())
+    .then(data => {
+      buzos_array = data;
+      renderResultados(data);
+      agregarAlCarrito(data);
+    })
+    .catch(err => {
+      console.error("Error al cargar los buzos:", err);
+      productos.innerHTML = "<p>Error al cargar los productos...</p>";
+    });
+}
 
 function renderResultados(array) {
   productos.innerHTML = "";
@@ -42,7 +57,7 @@ function agregarAlCarrito(buzosArray) {
   });
 }
 
-const search_buzos = document.getElementById("search_buzos");
+
 if (search_buzos) {
   search_buzos.addEventListener("input", () => {
     const termino = search_buzos.value.toLowerCase();
