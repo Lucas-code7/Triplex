@@ -24,7 +24,7 @@ array.forEach(buzo => {
     const container = document.createElement("div")
     container.className = "card-buzo"
     container.innerHTML=`
-                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src=".${buzo.imagen}"></a>
+                         <a href="./pages/${buzo.nombre}.html"> <img class="img-buzo" src="${buzo.imagen}"></a>
                          <h3 class="nombre-buzo">${buzo.nombre}</h3>
                          <p>$${buzo.precio} <button class="add-product" id="${buzo.id}">+</button></p>
                             `
