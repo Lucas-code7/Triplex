@@ -6,13 +6,12 @@ function ajustarRuta(ruta) {
 // esto solo porque no lo entendia muy bien el como construir bien la ruta y que no se mezcle creando un buzo,js
 
 
-const search_buzos = document.getElementById("search_buzos");
 const productos = document.getElementById("buzos")
 let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
 let buzos_array = [];
 
-fetch("/json/buzos.json")
+fetch("/Triplex/json/buzos.json")
   .then(res => res.json())
   .then(data => {
     console.log("BUZOS CARGADOS:", data); 
@@ -58,13 +57,15 @@ function agregarAlCarrito(buzosArray){
     )
 }
 
-search_buzos.addEventListener("input", () => {
-  const termino = search_buzos.value.toLowerCase()
-  const filtrados = buzos_array.filter(buzo =>
-    buzo.nombre.toLowerCase().includes(termino)
-  )
-  renderResultados(filtrados);
-  agregarAlCarrito(filtrados);
-})
-
+const search_buzos = document.getElementById("search_buzos");
+if (search_buzos) {
+  search_buzos.addEventListener("input", () => {
+    const termino = search_buzos.value.toLowerCase()
+    const filtrados = buzos_array.filter(buzo =>
+      buzo.nombre.toLowerCase().includes(termino)
+    )
+    renderResultados(filtrados);
+    agregarAlCarrito(filtrados);
+  });
+}
 
