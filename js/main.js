@@ -1,5 +1,6 @@
 // tuve que usar chat gpt, perdon
 function ajustarRuta(ruta) {
+  // Detecta si estás en /pages/
   const enSubcarpeta = window.location.pathname.includes("/pages/");
   return enSubcarpeta ? "../" + ruta : ruta;
 }
