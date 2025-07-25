@@ -1,8 +1,13 @@
 // tuve que usar chat gpt, perdon
 function ajustarRuta(ruta) {
-  const enPages = window.location.pathname.includes("/pages/");
-  return enPages ? "../" + ruta : ruta;
+  const path = window.location.pathname;
+
+  if (path.includes("/pages/")) {
+    return "../" + ruta;
+  }
+  return ruta;
 }
+
 // esto solo porque no lo entendia muy bien el como construir bien la ruta y que no se mezcle creando un buzo,js
 
 
