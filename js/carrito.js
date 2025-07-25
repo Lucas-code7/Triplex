@@ -10,7 +10,7 @@ function carrito(products){
         const subtotal = product.cantidad * product.precio
         total += subtotal
         item.innerHTML= `
-                         <a href="${product.nombre}.html"> <img class="img-buzo" src="..${product.imagen}"></a>
+                         <a href="${product.nombre}.html"> <img class="img-buzo" src="../${product.imagen}"></a>
                          <h3 class="nombre-buzo">${product.nombre}</h3>
                          <button class="restar-boton" id="${product.id}">-</button>
                          <span class"cantidad" id="cantidad" >${product.cantidad} </span>
