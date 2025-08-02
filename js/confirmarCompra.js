@@ -1,5 +1,5 @@
 const btn = document.getElementById("btnSeguir");
-if (!btn) return;
+if (!btn) {
 
 const campos = [
     document.getElementById("nombre"),
@@ -77,3 +77,4 @@ btn.addEventListener("click", () => {
         window.location.href = "metodoDePago.html";
     }
 });
+}

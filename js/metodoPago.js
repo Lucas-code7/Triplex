@@ -1,8 +1,6 @@
 
-
 const btn = document.getElementById("btnPagar");
-if (!btn) return;
-
+if (!btn){
 const campos = [
     document.getElementById("nombre"),
     document.getElementById("dni"),
@@ -46,14 +44,14 @@ function validarFormulario() {
 
     if (mensajesError[0]) {
         erroresDiv.innerHTML = mensajesError.map(msg => `<p>${msg}</p>`).join("");
-        return true; 
+        return true; // hay errores
     } else {
         erroresDiv.innerHTML = "";
-        return false; 
+        return false; // formulario válido
     }
 }
 
-
+// Validación en vivo
 campos.forEach(input => {
     input.addEventListener("input", validarFormulario);
 });
@@ -77,35 +75,33 @@ btn.addEventListener("click", () => {
     }
 });
 
-// Mostrar productos del carrito
-let carritoContainer = document.getElementById("productosPagar");
+
+let carritoContainer = document.getElementById("productosPagar")
 let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
-function carrito(products) {
+function carrito(products){
     carritoContainer.innerHTML = "";
-    let total = 0;
-
-    products.forEach(product => { 
-        const item = document.createElement("div");
-        item.className = "div-pago";
-        const subtotal = product.cantidad * product.precio;
-        total += subtotal;
-
-        item.innerHTML = `
-            <a href="${product.nombre}.html">
-                <img class="img-buzo-pago" src="../${product.imagen}">
-            </a>
-            <h3 class="nombre-buzo">${product.nombre}</h3>
-            <span class="cantidad">Cantidad: ${product.cantidad}</span>
-            <span class="subtotal">$${subtotal}</span>
-        `;
-        carritoContainer.appendChild(item);
+    let total= 0;
+    products.forEach (product => { 
+        const item = document.createElement("div")
+        item.className="div-pago"
+        const subtotal = product.cantidad * product.precio
+        total += subtotal
+        item.innerHTML= `
+                        
+                         <a href="${product.nombre}.html"> <img class="img-buzo-pago" src="../${product.imagen}"></a>
+                         <h3 class="nombre-buzo">${product.nombre}</h3>
+                         <span class"cantidad" id="cantidad" >cantidad: ${product.cantidad} </span>
+                         <span class"subtotal">$${subtotal}</span>
+                            `
+        carritoContainer.appendChild(item)
     });
 
     const totalDiv = document.createElement("div");
-    totalDiv.className = "total-carrito";
-    totalDiv.innerHTML = `<h2>Total: $${total}</h2>`;
-    carritoContainer.appendChild(totalDiv);
+      totalDiv.className = "total-carrito";
+      totalDiv.innerHTML = `<h2>Total: $${total}</h2>`;
+      carritoContainer.appendChild(totalDiv);
 }
 
-carrito(carritoStorage);
+carrito(carritoStorage)
+}
