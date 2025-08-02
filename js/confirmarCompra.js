@@ -1,52 +1,79 @@
 
-    const btn = document.getElementById("btnSeguir");
-    if (!btn) return;
+const btn = document.getElementById("btnSeguir");
+if (!btn) return;
 
-    const campos = [
-        document.getElementById("nombre"),
-        document.getElementById("dni"),
-        document.getElementById("calle"),
-        document.getElementById("localidad"),
-        document.getElementById("tel1"),
-        document.getElementById("tel2"),
-        document.getElementById("correo"),
-        document.getElementById("correo2"),
+const campos = [
+    document.getElementById("nombre"),
+    document.getElementById("dni"),
+    document.getElementById("calle"),
+    document.getElementById("localidad"),
+    document.getElementById("tel1"),
+    document.getElementById("tel2"),
+    document.getElementById("correo"),
+    document.getElementById("correo2"),
+];
+
+const erroresDiv = document.getElementById("erroresFormulario");
+
+function soloLetras(valor) {
+    return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valor.trim());
+}
+
+function validarFormulario() {
+    const mensajesError = [];
+
+    const reglas = [
+        {
+            condicion: () => campos.some(c => !c || c.value.trim() === ""),
+            mensaje: "Todos los campos deben estar completos."
+        },
+        {
+            condicion: () => !soloLetras(campos[0].value),
+            mensaje: "El nombre solo puede contener letras."
+        },
+        {
+            condicion: () => !soloLetras(campos[3].value),
+            mensaje: "La localidad solo puede contener letras."
+        },
+        {
+            condicion: () => campos[6].value !== campos[7].value,
+            mensaje: "Los correos no coinciden."
+        }
     ];
 
-    function soloLetras(valor) {
-        return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valor.trim());
-    }
-
-    function validarFormulario() {
-        let completo = campos.every(input => input && input.value.trim() !== "");
-        const letrasOk = soloLetras(campos[0].value) && soloLetras(campos[3].value);
-        const correosIguales = campos[6].value === campos[7].value;
-
-        btn.disabled = !(completo && letrasOk && correosIguales);
-    }
-
-    campos.forEach(input => {
-        input.addEventListener("input", validarFormulario);
-    });
-
-    btn.addEventListener("click", () => { 
-        if (!btn.disabled) {
-            const datosUsuario = {
-            nombre: document.getElementById("nombre").value.trim(),
-            dni: document.getElementById("dni").value.trim(),
-            calle: document.getElementById("calle").value.trim(),
-            localidad: document.getElementById("localidad").value.trim(),
-            tel1: document.getElementById("tel1").value.trim(),
-            tel2: document.getElementById("tel2").value.trim(),
-            correo: document.getElementById("correo").value.trim()
-        };
-        localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
-        
-            window.location.href = "metodoDePago.html";
+    reglas.forEach(regla => {
+        if (regla.condicion()) {
+            mensajesError.push(`❌ ${regla.mensaje}`);
         }
     });
 
-    validarFormulario();
+    if (mensajesError[0]) {
+        erroresDiv.innerHTML = mensajesError.map(msg => `<p>${msg}</p>`).join("");
+        btn.disabled = true;
+    } else {
+        erroresDiv.innerHTML = "";
+        btn.disabled = false;
+    }
+}
 
+campos.forEach(input => {
+    input.addEventListener("input", validarFormulario);
+});
 
+btn.addEventListener("click", () => { 
+    if (!btn.disabled) {
+        const datosUsuario = {
+            nombre: campos[0].value.trim(),
+            dni: campos[1].value.trim(),
+            calle: campos[2].value.trim(),
+            localidad: campos[3].value.trim(),
+            tel1: campos[4].value.trim(),
+            tel2: campos[5].value.trim(),
+            correo: campos[6].value.trim()
+        };
+        localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
+        window.location.href = "metodoDePago.html";
+    }
+});
 
+validarFormulario();

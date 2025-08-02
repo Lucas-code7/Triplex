@@ -46,9 +46,24 @@ function agregarAlCarrito(buzosArray){
             carritoActual.push({ ...confirmProduct, cantidad: 1 });
             }
             localStorage.setItem("carritoProduct", JSON.stringify(carritoActual));
-    }}
-    )
+           
+            mostrarToast(`Se añadió correctamente al carrito "${confirmProduct.nombre}"`);
+    }
+  })
 }
+
+function mostrarToast(mensaje) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = mensaje;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000); 
+}
+
+
 
 const search_buzos = document.getElementById("search_buzos");
 if (search_buzos) {
