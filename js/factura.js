@@ -1,3 +1,8 @@
+function ajustarRuta(ruta) {
+  const enSubcarpeta = window.location.pathname.includes("/pages/");
+  return enSubcarpeta ? "../" + ruta : ruta;
+}
+
 let carritoContainer = document.getElementById("productosPagar")
 let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
@@ -31,7 +36,7 @@ function carrito(products){
         total += subtotal
         item.innerHTML= `
                         
-                         <a href="${product.nombre}.html"> <img class="img-buzo-pago" src="../${product.imagen}"></a>
+                         <a href="${product.nombre}.html"> <img class="img-buzo-pago" src="${ajustarRuta(product.imagen)}"></a>
                          <h3 class="nombre-buzo">${product.nombre}</h3>
                          <span class"cantidad" id="cantidad" >cantidad: ${product.cantidad} </span>
                          <span class"subtotal">$${subtotal}</span>

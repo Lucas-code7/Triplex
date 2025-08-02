@@ -1,65 +1,49 @@
     [
     {"id" : 1,
-    "nombre" : "buzo disturb",
+    "nombre" : "Buzo disturb",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_disturb_atras.png",
     "cantidad" : 1
     },
     {
     "id" : 2,
-    "nombre" : "buzo 2",
+    "nombre" : "Buzo dragon",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_dragon_atras.png",
     "cantidad" : 1
     },
     {
     "id" : 3,
-    "nombre" : "buzo 3",
+    "nombre" : "Buzo Butterfly blue",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_mariposa_azul_atras.png",
     "cantidad" : 1
     },
     {
     "id" : 4,
-    "nombre" : "buzo 4",
+    "nombre" : "Buzo space ",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_space_atras.png",
     "cantidad" : 1
 
     },
     {
     "id" : 5,
-    "nombre" : "buzo 5",
+    "nombre" : "Buzo Edition Triplex ",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_triplex_verde.png",
     "cantidad" : 1
     },
     {
     "id" : 6,
-    "nombre" : "buzo 6",
+    "nombre" : "Buzo Butterfly green",
     "precio": 300,
-    "imagen": "img/buzo_disturb.png",
+    "imagen": "img/buzo_mariposa_verde_atras.png",
     "cantidad" : 1
     },
     {
     "id" : 7,
     "nombre" : "buzo 7",
-    "precio": 300,
-    "imagen": "img/buzo_disturb.png",
-    "cantidad" : 1
-    },
-
-    {
-    "id" : 8,
-    "nombre" : "buzo 8",
-    "precio": 300,
-    "imagen": "img/buzo_disturb.png",
-    "cantidad" : 1
-    },
-
-    {
-    "id" : 9,
-    "nombre" : "buzo 9",
     "precio": 300,
     "imagen": "img/buzo_disturb.png",
     "cantidad" : 1
