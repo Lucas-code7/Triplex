@@ -1,4 +1,3 @@
-
 const btn = document.getElementById("btnSeguir");
 if (!btn) return;
 
@@ -49,19 +48,22 @@ function validarFormulario() {
 
     if (mensajesError[0]) {
         erroresDiv.innerHTML = mensajesError.map(msg => `<p>${msg}</p>`).join("");
-        btn.disabled = true;
+        return true; 
     } else {
         erroresDiv.innerHTML = "";
-        btn.disabled = false;
+        return false; 
     }
 }
+
 
 campos.forEach(input => {
     input.addEventListener("input", validarFormulario);
 });
 
 btn.addEventListener("click", () => { 
-    if (!btn.disabled) {
+    const hayErrores = validarFormulario();
+    
+    if (!hayErrores) {
         const datosUsuario = {
             nombre: campos[0].value.trim(),
             dni: campos[1].value.trim(),
@@ -75,5 +77,3 @@ btn.addEventListener("click", () => {
         window.location.href = "metodoDePago.html";
     }
 });
-
-validarFormulario();
