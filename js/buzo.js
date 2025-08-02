@@ -7,7 +7,7 @@ const productos = document.getElementById("buzos");
 const search_buzos = document.getElementById("search_buzos");
 
 let carritoProduct = JSON.parse(localStorage.getItem("carritoProduct")) || [];
-let buzos_array = []; 
+let buzos_array = [];
 
 if (productos) {
   fetch(ajustarRuta("json/buzos.json"))
@@ -39,39 +39,43 @@ function renderResultados(array) {
   });
 }
 
-function agregarAlCarrito(buzosArray){
-    const agregar = document.querySelectorAll(".add-product")
-    agregar.forEach(boton=>{
-        boton.onclick= (e) =>{
-            const productoId = e.currentTarget.id
-            const confirmProduct = buzosArray.find(buzo => buzo.id == productoId);
-            let carritoActual = JSON.parse(localStorage.getItem("carritoProduct")) || [];
-            const existeEnCarrito = carritoActual.find(x => x.id == confirmProduct.id);
-            if (existeEnCarrito) {
-            existeEnCarrito.cantidad += 1;
-            } else {
-            carritoActual.push({ ...confirmProduct, cantidad: 1 });
-            }
-            localStorage.setItem("carritoProduct", JSON.stringify(carritoActual));
-           
-            mostrarToast(`Se añadió correctamente al carrito "${confirmProduct.nombre}"`);
-    }
-  })
-}
+function agregarAlCarrito(buzosArray) {
+  const agregar = document.querySelectorAll(".add-product");
+  agregar.forEach(boton => {
+    boton.onclick = (e) => {
+      const productoId = e.currentTarget.id;
+      const productoSeleccionado = buzosArray.find(buzo => buzo.id == productoId);
 
+      if (!productoSeleccionado) {
+        console.error("Producto no encontrado con ID:", productoId);
+        return;
+      }
+
+      let carritoActual = JSON.parse(localStorage.getItem("carritoProduct")) || [];
+      const existeEnCarrito = carritoActual.find(x => x.id == productoSeleccionado.id);
+
+      if (existeEnCarrito) {
+        existeEnCarrito.cantidad += 1;
+      } else {
+        carritoActual.push({ ...productoSeleccionado, cantidad: 1 });
+      }
+
+      localStorage.setItem("carritoProduct", JSON.stringify(carritoActual));
+      mostrarToast(`Se añadió correctamente al carrito: "${productoSeleccionado.nombre}"`);
+    };
+  });
+}
 
 function mostrarToast(mensaje) {
-    const toast = document.getElementById("toast");
-    if (!toast) return;
-    toast.textContent = mensaje;
-    toast.classList.add("show");
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = mensaje;
+  toast.classList.add("show");
 
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3000); 
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
 }
-
-
 
 if (search_buzos) {
   search_buzos.addEventListener("input", () => {
