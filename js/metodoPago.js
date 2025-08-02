@@ -1,5 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+
     const btn = document.getElementById("btnPagar");
     if (!btn) return;
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     validarFormulario();
-});
+
 
 let carritoContainer = document.getElementById("productosPagar")
 let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];

@@ -1,5 +1,4 @@
 
-document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("btnSeguir");
     if (!btn) return;
 
@@ -48,6 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     validarFormulario();
-});
+
 
 

@@ -31,7 +31,7 @@
     "id" : 5,
     "nombre" : "Buzo Edition Triplex ",
     "precio": 300,
-    "imagen": "img/buzo_triplex_verde.png",
+    "imagen": "img/buzo_triplex_verde_atras.png",
     "cantidad" : 1
     },
     {
@@ -43,7 +43,7 @@
     },
     {
     "id" : 7,
-    "nombre" : "buzo 7",
+    "nombre" : "buzo basico",
     "precio": 300,
     "imagen": "img/buzo_disturb.png",
     "cantidad" : 1

@@ -6,10 +6,8 @@ function ajustarRuta(ruta) {
 let carritoContainer = document.getElementById("productosPagar")
 let carritoStorage = JSON.parse(localStorage.getItem("carritoProduct")) || [];
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("factura.js cargado");
 
-    const datos = JSON.parse(localStorage.getItem("datosUsuario"));
+const datos = JSON.parse(localStorage.getItem("datosUsuario"));
 
     if (datos) {
         const info = document.createElement("div");
@@ -25,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         carritoContainer.appendChild(info);
     }
-});
+
 function carrito(products){
     carritoContainer.innerHTML = "";
     let total= 0;
@@ -53,11 +51,8 @@ function carrito(products){
 
 carrito(carritoStorage)
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("factura.js cargado");
 
-    const btnCancelar = document.getElementById("btnclear");
-
+const btnCancelar = document.getElementById("btnclear");
     if (btnCancelar) {
         btnCancelar.addEventListener("click", () => {
             Swal.fire({
@@ -75,4 +70,3 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-});
